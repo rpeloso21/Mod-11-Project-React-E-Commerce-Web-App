@@ -85,7 +85,7 @@ class OrderForm extends Component {
         event.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0 ) {
-            this.setState({isloading: true, errors: null})
+            this.setState({isLoading: true, errors: null})
             const orderData = {
                 customer_id: this.state.customer_id.trim(),
                 date: this.state.date.trim(),
@@ -105,14 +105,14 @@ class OrderForm extends Component {
                     orders: '',
                     errors: {},
                     selectedOrderId: null,
-                    isloading: false
+                    isLoading: false
                 });
                 this.props.navigate('/orders')
-                this.setState({isloading: false});
+                this.setState({isLoading: false});
 
             })
             .catch(error => {
-                this.setState({ error: error.toString(), isloading: false});
+                this.setState({ error: error.toString(), isLoading: false});
 
             });
 

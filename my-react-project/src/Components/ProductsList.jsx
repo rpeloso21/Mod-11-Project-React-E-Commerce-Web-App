@@ -33,7 +33,7 @@ class ProductList extends Component {
     }
 
     deleteProduct = (productId) => {
-        axios.delete(`http://127.0.0.1:5000/products/${product.id}`)
+        axios.delete(`http://127.0.0.1:5000/products/${productId}`)
             .then(() => {
                 this.fetchProducts();
             })
@@ -62,7 +62,7 @@ class ProductList extends Component {
     };
 };
 
-ProductList.proptype = {
+ProductList.propType = {
     onProductSelect: func
 }
 

@@ -7,7 +7,6 @@ class ProductForm extends Component {
         super(props);
         this.state = {
             name: '',
-            orders: '',
             price: '',
             errors: {},
             selectedProductId: null,
@@ -29,7 +28,6 @@ class ProductForm extends Component {
                 const productData = response.data;
                 this.setState({
                     name: productData.name,
-                    orders: productData.orders,
                     price: productData.price,
                     selectedProductId: id
                 });
@@ -49,7 +47,6 @@ class ProductForm extends Component {
                     const productData = response.data;
                     this.setState({
                         name: productData.name,
-                        orders: productData.orders,
                         price: productData.price
                     });
                 })
@@ -59,7 +56,6 @@ class ProductForm extends Component {
             } else {
                 this.setState({
                     name: '',
-                    orders: '',
                     price: ''
                 });
             }
@@ -73,10 +69,9 @@ class ProductForm extends Component {
 
 
     validateForm = () => {
-        const {name, orders, price} = this.state;
+        const {name, price} = this.state;
         const errors = {};
         if(!name) errors.name = 'Name is required';
-        if(!orders) errors.orders = 'Orders is required';
         if(!price) errors.price = 'Price is required';
         return errors;
     }
@@ -85,11 +80,10 @@ class ProductForm extends Component {
         event.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0 ) {
-            this.setState({isloading: true, errors: null})
+            this.setState({isLoading: true, errors: null})
             const productData = {
                 name: this.state.name.trim(),
-                orders: this.state.orders.trim(),
-                price: this.state.price.trim()
+                price: String(this.state.price).trim()
             };
             const apiUrl = this.state.selectedProductId
                 ? `http://127.0.0.1:5000/products/${this.state.selectedProductId}`
@@ -101,18 +95,17 @@ class ProductForm extends Component {
             .then(() => {
                 this.setState({
                     name: '',
-                    orders: '',
                     price: '',
                     errors: {},
                     selectedProductId: null,
-                    isloading: false
+                    isLoading: false
                 });
                 this.props.navigate('/products')
-                this.setState({isloading: false});
+                this.setState({isLoading: false});
 
             })
             .catch(error => {
-                this.setState({ error: error.toString(), isloading: false});
+                this.setState({ error: error.toString(), isLoading: false});
 
             });
 
@@ -122,7 +115,7 @@ class ProductForm extends Component {
     }
 
     render() {
-        const {name, orders, price, errors} = this.state;
+        const {name, price, errors} = this.state;
 
         return(
             <form onSubmit={this.handleSubmit} >
@@ -130,19 +123,13 @@ class ProductForm extends Component {
                 <label>
                     Name:
                     <input type="text" name="name" value={name} onChange={this.handleChange} />
-                    {errors.name && <div style={{color: 'red'}}>{errors.name}</div>}
-                </label>
-                <br />
-                <label>
-                    Orders:
-                    <input type="text" name="orders" value={orders} onChange={this.handleChange} />
-                    {errors.orders && <div style={{color: 'red'}}>{errors.orders}</div>}
+                    {/* {errors.name && <div style={{color: 'red'}}>{errors.name}</div>} */}
                 </label>
                 <br />
                 <label>
                     Price:
                     <input type="text" name="price" value={price} onChange={this.handleChange} />
-                    {errors.price && <div style={{color: 'red'}}>{errors.price}</div>}
+                    {/* {errors.price && <div style={{color: 'red'}}>{errors.price}</div>} */}
                 </label>
                 <button type="submit">Submit</button>
             </form>

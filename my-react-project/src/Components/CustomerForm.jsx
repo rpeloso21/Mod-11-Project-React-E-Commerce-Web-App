@@ -85,7 +85,7 @@ class CustomerForm extends Component {
         event.preventDefault();
         const errors = this.validateForm();
         if (Object.keys(errors).length === 0 ) {
-            this.setState({isloading: true, errors: null})
+            this.setState({isLoading: true, errors: null})
             const customerData = {
                 name: this.state.name.trim(),
                 email: this.state.email.trim(),
@@ -105,14 +105,14 @@ class CustomerForm extends Component {
                     phone: '',
                     errors: {},
                     selectedCustomerId: null,
-                    isloading: false
+                    isLoading: false
                 });
                 this.props.navigate('/customers')
-                this.setState({isloading: false});
+                this.setState({isLoading: false});
 
             })
             .catch(error => {
-                this.setState({ error: error.toString(), isloading: false});
+                this.setState({ error: error.toString(), isLoading: false});
 
             });
 
@@ -130,19 +130,19 @@ class CustomerForm extends Component {
                 <label>
                     Name:
                     <input type="text" name="name" value={name} onChange={this.handleChange} />
-                    {errors.name && <div style={{color: 'red'}}>{errors.name}</div>}
+                    {/* {errors.name && <div style={{color: 'red'}}>{errors.name}</div>} */}
                 </label>
                 <br />
                 <label>
                     Email:
                     <input type="email" name="email" value={email} onChange={this.handleChange} />
-                    {errors.email && <div style={{color: 'red'}}>{errors.email}</div>}
+                    {/* {errors.email && <div style={{color: 'red'}}>{errors.email}</div>} */}
                 </label>
                 <br />
                 <label>
                     Phone:
                     <input type="tel" name="phone" value={phone} onChange={this.handleChange} />
-                    {errors.phone && <div style={{color: 'red'}}>{errors.phone}</div>}
+                    {/* {errors.phone && <div style={{color: 'red'}}>{errors.phone}</div>} */}
                 </label>
                 <button type="submit">Submit</button>
             </form>
