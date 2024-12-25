@@ -60,7 +60,7 @@ class OrderForm extends Component {
                 this.setState({
                     customer_id: '',
                     date: '',
-                    orders: ''
+                    products: ''
                 });
             }
         }
@@ -87,9 +87,9 @@ class OrderForm extends Component {
         if (Object.keys(errors).length === 0 ) {
             this.setState({isLoading: true, errors: null})
             const orderData = {
-                customer_id: this.state.customer_id.trim(),
-                date: this.state.date.trim(),
-                orders: this.state.orders.trim()
+                customer_id: String(this.state.customer_id).trim(),
+                date: String(this.state.date).trim(),
+                products: String(this.state.products).trim()
             };
             const apiUrl = this.state.selectedCustomerId
                 ? `http://127.0.0.1:5000/orders/${this.state.selectedOrderId}`
@@ -102,7 +102,7 @@ class OrderForm extends Component {
                 this.setState({
                     customer_id: '',
                     date: '',
-                    orders: '',
+                    products: '',
                     errors: {},
                     selectedOrderId: null,
                     isLoading: false
@@ -130,19 +130,19 @@ class OrderForm extends Component {
                 <label>
                     Customer_ID:
                     <input type="text" name="customer_id" value={customer_id} onChange={this.handleChange} />
-                    {errors.customer_id && <div style={{color: 'red'}}>{errors.customer_id}</div>}
+                    {/* {errors.customer_id && <div style={{color: 'red'}}>{errors.customer_id}</div>} */}
                 </label>
                 <br />
                 <label>
                     Date:
                     <input type="date" name="date" value={date} onChange={this.handleChange} />
-                    {errors.date && <div style={{color: 'red'}}>{errors.date}</div>}
+                    {/* {errors.date && <div style={{color: 'red'}}>{errors.date}</div>} */}
                 </label>
                 <br />
                 <label>
                     Products:
                     <input type="text" name="products" value={products} onChange={this.handleChange} />
-                    {errors.products && <div style={{color: 'red'}}>{errors.products}</div>}
+                    {/* {errors.products && <div style={{color: 'red'}}>{errors.products}</div>} */}
                 </label>
                 <button type="submit">Submit</button>
             </form>
